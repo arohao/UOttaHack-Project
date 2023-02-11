@@ -3,6 +3,9 @@
   "name": "EcoCart",
   "description": "A browser extension that promotes sustainable shopping by providing information about the environmental impact of products and alternative eco-friendly options.",
   "version": "1.0",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
   "permissions": [
     "activeTab",
     "https://*/*"

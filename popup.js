@@ -1,3 +1,6 @@
+
+
+
 let costOfCurrentCart = 0;
 const totalSpentMonthly = 0;
 const totalSpentYearly = 0;
@@ -14,7 +17,7 @@ chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
 function checker(boolCheck) {
   if(boolCheck) {
     console.log('Found checkout page');
-    calculateCurrentCartPrice();
+    //calculateCurrentCartPrice();
   } else {
     console.log('Did not find checkout page');
   }
@@ -37,31 +40,6 @@ function calculateCurrentCartPrice() {
   var textJ = sub.indexOf(".");
   var result = sub.substr(0,textJ+2);
   console.log(result);
-
-
-
-  `
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const parsedHTML = parser.parseFromString(html, 'text/html');
-    console.log(parsedHTML)
-    const priceElement = parsedHTML.querySelector('.price-summary__price--converted');
-      if(priceElement) {
-        console.log("Price information!!!!");
-        let price = priceElement.textContent.match(/\d+(?:\.\d+)?/g);
-        if (price != 0) {
-          price = parseFloat(price[0]);
-          costOfCurrentCart = price;
-        }
-        document.getElementById("calculateCartPrice").innerHTML = costOfCurrentCart.toString();
-        console.log(costOfCurrentCart);
-      } else {
-        console.log("Price information not found");
-        console.log()
-      }
-      `
   
 }
-//setTimeout(calculateCurrentCartPrice,5000);
-//setTimeout(checker, 5000);
+

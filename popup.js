@@ -1,5 +1,3 @@
-const cheerio = require('cheerio');
-const boolCheck = false;
 let costOfCurrentCart = 0;
 const totalSpentMonthly = 0;
 const totalSpentYearly = 0;
@@ -7,11 +5,11 @@ const monthlyBudget = 0;
 const yearlyBudget = 0;
 let url;
 
-
 chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
   url = tabs[0].url;
-  checker(url.includes("checkout") || url.includes("shop") || url.includes("buy") || url.includes("cart"));  
+  checker(url.toLowerCase().includes("checkout") || url.toLowerCase().includes("shop") || url.includes("buy") || url.includes("cart"));  
 });
+
 
 function checker(boolCheck) {
   if(boolCheck) {
@@ -22,28 +20,48 @@ function checker(boolCheck) {
   }
 }
 
-
-
-`function calculateCurrentCartPrice() {
+function calculateCurrentCartPrice() {
+  var bodyText;
   fetch(url)
+  .then((response) => response.text())
+  .then((user)=> {
+    bodyText = user.toLowerCase();
+  });
+
+  while (!(bodyText.includes('$'))){
+    setTimeout(()=> {console.log('Wait...'); }, 1000);
+  }
+
+  var textI = bodyText.indexOf("$");
+  var sub = bodyText.substr(textI);
+  var textJ = sub.indexOf(".");
+  var result = sub.substr(0,textJ+2);
+  console.log(result);
+
+
+
+  `
   .then(response => response.text())
   .then(html => {
-    let $ = cheerio.load(html);
-    let priceElement = $("*:contains('$')");
-    if(priceElement.length > 0) {
-      for(var i = 0; i < priceElement.length; i++) {
-        let price = priceElement[i].text().match(/\d+(?:\.\d+)?/g);
-        if (price) {
+    const parser = new DOMParser();
+    const parsedHTML = parser.parseFromString(html, 'text/html');
+    console.log(parsedHTML)
+    const priceElement = parsedHTML.querySelector('.price-summary__price--converted');
+      if(priceElement) {
+        console.log("Price information!!!!");
+        let price = priceElement.textContent.match(/\d+(?:\.\d+)?/g);
+        if (price != 0) {
           price = parseFloat(price[0]);
-          if(costOfCurrentCart == 0 || costOfCurrentCart < price) {
-            costOfCurrentCart = price;
-          }
+          costOfCurrentCart = price;
         }
+        document.getElementById("calculateCartPrice").innerHTML = costOfCurrentCart.toString();
+        console.log(costOfCurrentCart);
+      } else {
+        console.log("Price information not found");
+        console.log()
       }
-      document.getElementById("calculateCartPrice").innerHTML = costOfCurrentCart.toString();
-      console.log(costOfCurrentCart);
-    } else {
-      console.log("Price information not found");
-    }
-  });
-}`
+      `
+  
+}
+//setTimeout(calculateCurrentCartPrice,5000);
+//setTimeout(checker, 5000);

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        background-color: white;
-        color: green;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="popup.css">
   </head>
   <body>
-    <h1>EcoCart</h1>
-    <p>Welcome to EcoCart, your sustainable shopping companion!</p>
+    <img class="icon" src="images/carticon.png"/>
+    <h1>Shopping Wrapped</h1>
+    <div class = "description">Your shopping from the year, wrapped.</div>
+    <p id="currentCartPrice"></p>
+    <script src="popup.js"></script>
+    <div id="buttons">
+      <button>Past Month</button>
+      <button>Six Months</button>
+      <button>Past Year</button>
+    </div>
   </body>
 </html>

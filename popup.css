@@ -1,0 +1,41 @@
+body {
+    background-color: #fefbf2;
+    color: rgb(0, 0, 0);
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    text-align: center;
+    width: 250px;
+  }
+
+h1 {
+    font-size: 36px;
+    color: rgb(161, 0, 0);
+    margin-bottom: 20px;
+    font-family: 'Fantasy';
+    font-weight: lighter;
+    /*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* text black outline */
+  }
+
+img{
+  width: 100px;
+  margin-top: 10px;
+}
+
+button {
+  margin: 5px;  
+  padding:10px;
+  color: rgb(59, 59, 59);
+  border: none;
+}
+
+button:hover{
+  background-color: rgb(88, 4, 4);
+  color: white;
+  border: none;
+}
+
+#buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,6 +1,5 @@
 
 
-
 let costOfCurrentCart = 0;
 const totalSpentMonthly = 0;
 const totalSpentYearly = 0;
